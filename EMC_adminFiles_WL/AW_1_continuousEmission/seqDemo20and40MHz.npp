@@ -1,0 +1,46 @@
+
+
+#==============================
+#set Test parameters
+wl up
+wl pkteng_stop tx 
+wl down
+wl frameburst 1
+wl ampdu 1
+wl country ALL
+wl rateset 54b
+wl bi 65000
+wl phy_watchdog 0
+wl mpc 0
+wl txchain 1
+wl mimo_bw_cap 1
+wl band b
+#wl 2g_rate -r 6
+wl 2g_rate -h 0 -b 40 
+
+wl up
+wl disassoc 
+wl phy_forcecal 1
+wl txpwr1 -o 19
+
+
+#==============================
+#do Test
+wl chanspec -c 8 -b 2 -w 40 -s 0
+wl pkteng_start 00:11:22:33:44:55 tx 20 1500 0
+@wl pkteng_stop tx
+
+wl chanspec -c 6 -b 2 -w 20 -s 0
+wl pkteng_start 00:11:22:33:44:55 tx 20 1500 0
+@wl pkteng_stop tx
+
+wl chanspec -c 4 -b 2 -w 40 -s 0
+wl pkteng_start 00:11:22:33:44:55 tx 20 1500 0
+@wl pkteng_stop tx
+
+#==============================
+#terminate Test
+wl pkteng_stop tx
+wl down
+
+

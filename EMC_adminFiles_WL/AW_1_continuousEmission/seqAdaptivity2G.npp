@@ -1,0 +1,25 @@
+# §4.2.6.10 adaptivity for 2.4 GHz
+
+wl out
+wl down
+wl frameburst 0
+wl ampdu 1
+# Set to a European country code FR, GB
+wl country FR 
+wl bi 65000
+wl phy_watchdog 0
+wl mpc 0
+wl txchain 1 
+wl mimo_bw_cap 1
+# ETSI standard does not state which rate to use;
+# therefore, set up per agreement with EMC test lab to
+# produce 30% traffic.
+wl up
+wl phy_forcecal 1
+# To connect to Access Point, need to know the SSID
+# name. Replace <SSID> with the actual name of the Access Point.
+wl join <SSID> 
+wl status 
+wl phy_ed_thresh -70
+iperf -c <ip address of server> -u -b -l -i 1 -t 10000
+

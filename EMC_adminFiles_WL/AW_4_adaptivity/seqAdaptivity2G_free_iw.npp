@@ -1,0 +1,46 @@
+# 4.2.7.2 adaptivity for 2.4 GHz
+#Case of open connection (not protected): no wpa_supplicant
+#and using iw dev wlan0 connect <SSID>
+
+ifconfig wlan0 down
+ifconfig wlan0 up
+pkill wpa_supplicant
+pkill hostapd
+pkill udhcpc
+wl disassoc
+
+iw dev wlan0 connect test_rs9113-64bit
+
+
+udhcpc -i wlan0
+
+@iw dev wlan0 link
+#@wl assoc
+
+wl down
+wl frameburst 0
+wl ampdu 1
+wl country FR 
+wl bi 65000
+wl phy_watchdog 0
+wl mpc 0
+wl txchain 1 
+wl mimo_bw_cap 1
+# select 2G or 5G band and datate
+wl 2g_rate -r 1
+
+wl up
+wl phy_forcecal 1
+
+#connect to AP <SSID> (eg 'Exor_AP_FT'  or 'test_rs9113-64bit')
+##wl join test_rs9113-64bit
+
+wl status 
+wl phy_ed_thresh -70
+
+#@iperf -c <ip address of server> -u -b -l -i 1 -t 10000
+@iperf -c 111.112.113.1 -u -b -l -i 1 -t 10000
+
+@wl disassoc
+
+

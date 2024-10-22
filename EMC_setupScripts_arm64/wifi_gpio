@@ -1,0 +1,70 @@
+. /etc/exorint.funcs
+
+WIFI_SUPPORT=1
+
+# Hardware-specific wifi pin mappings
+case $(exorint_hwcode) in
+
+	#CA16|CA18
+	117|131)
+		WIFI_GPIO=4
+		;;
+
+	#JSMART|JSMARTQ|JSMART05
+	124|125|126)
+		WIFI_GPIO=92
+		;;
+
+	#TA19
+	141)
+		WIFI_GPIO=165
+		;;
+
+	#WU16
+	121)
+		#Wifi pin for Wu16-uS01
+		WIFI_GPIO=40
+		;;
+
+	#WU16 US03
+	122)
+		#Wifi pin for Wu16-uS03
+		WIFI_GPIO=84
+		;;
+
+	#AU16
+	123)
+		# no reset pin
+		;;
+
+	#JSMART uS04 i.Mx8
+	139)
+		WIFI_GPIO=125
+		;;
+
+	#WU20 nS02 i5
+	144)
+		WIFI_GPIO=59
+		;;
+
+	#WU20 uS04 i.Mx8 i10
+	147)
+		WIFI_GPIO=119
+		;;
+
+	#WU07 ns02 i7
+	159)
+		WIFI_GPIO=509
+		;;
+
+    # MOD_LR added to test wifi on ECO2XX board
+    #ECO2XX
+    154)
+		WIFI_GPIO=67
+		;;
+      
+	*)
+		WIFI_SUPPORT=0
+		;;
+
+esac
